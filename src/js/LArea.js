@@ -77,17 +77,27 @@ window.LArea = (function() {
                     '</div>';
                 document.body.appendChild(_self.gearArea);
                 areaCtrlInit();
-                var larea_cancel = _self.gearArea.querySelector(".larea_cancel");
-                larea_cancel.addEventListener('touchstart', function(e) {
-                    _self.close(e);
-                });
-                var larea_finish = _self.gearArea.querySelector(".larea_finish");
-                larea_finish.addEventListener('touchstart', function(e) {
-                    _self.finish(e);
-                });
+                
                 var area_province = _self.gearArea.querySelector(".area_province");
                 var area_city = _self.gearArea.querySelector(".area_city");
                 var area_county = _self.gearArea.querySelector(".area_county");
+                
+                var larea_cancel = _self.gearArea.querySelector(".larea_cancel");
+                larea_cancel.addEventListener('touchstart', function(e) {
+                    clearInterval(area_province["int_" + area_province.id]);
+                    clearInterval(area_city["int_" + area_city.id]);
+                    clearInterval(area_city["int_" + area_city.id]);
+                    _self.close(e);
+
+                });
+                var larea_finish = _self.gearArea.querySelector(".larea_finish");
+                larea_finish.addEventListener('touchstart', function(e) {
+                    clearInterval(area_province["int_" + area_province.id]);
+                    clearInterval(area_city["int_" + area_city.id]);
+                    clearInterval(area_city["int_" + area_city.id]);
+                    _self.finish(e);
+                });
+                
                 area_province.addEventListener('touchstart', gearTouchStart);
                 area_city.addEventListener('touchstart', gearTouchStart);
                 area_county.addEventListener('touchstart', gearTouchStart);
